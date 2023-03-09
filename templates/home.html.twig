@@ -1,3 +1,20 @@
-<h1>Coucou</h1>
+{% extends "base.html.twig" %}
 
-<p>Test paragraphe</p>
+{% block title %}BestTierList - Accueil
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4">Bienvenue sur BestTierList Test</h1>
+        <p class="lead">Ce site est un simple de test de différentes templates pour mettre en place un site détaillant les meilleurs tier-list de différents jeux.</p>
+        <hr class="my-4">
+        <p> Pour commencer, rendez-vous sur la page d'inscription.</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" role="button">Inscription</a>
+        </p>
+    </div>
+</div>
+
+{% endblock %}
