@@ -13,19 +13,15 @@ class AppFixtures extends Fixture
     /*
     * @var Generator
     */
-    private Generator $faker;
-
-    public function __construct()
-    {
-        $this->faker = Factory::create('fr_FR');
-    }
-
+ // Utilisation du bundle faker pour générer automatiquement des données 
     public function load(ObjectManager $manager): void
     {
+        $faker = Factory::create('fr_FR');
+
         for ($i = 0; $i < 50; $i++) { 
             $tierlist = new Tierlist();
-            $tierlist->setName($this->faker->word())
-                ->setType('Gacha');
+            $tierlist->setName('Tierlist ' . $i)
+                    ->setType($faker->randomElement(['Gacha', 'FPS', 'MMORPG', 'MOBA']));
                 
                 $manager->persist($tierlist);
         }
