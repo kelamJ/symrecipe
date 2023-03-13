@@ -29,7 +29,7 @@ class TierlistController extends AbstractController
         );
 
         return $this->render('pages/tierlist/index.html.twig', [
-            'tierlists' => []
+            'tierlists' => $tierlists
         ]);
     }
 }
