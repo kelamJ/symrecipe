@@ -11,7 +11,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TierlistController extends AbstractController
 {
-    #[Route('/tierlist', name: 'tierlist')]
+    /**
+     * Cette fonction affiche toutes les tierlist
+     *
+     * @param TierlistRepository $repository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     */
+    #[Route('/tierlist', name: 'tierlist', methods: ['GET'])]
     public function index(TierlistRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
         $tierlists = $paginator->paginate(
@@ -21,7 +29,7 @@ class TierlistController extends AbstractController
         );
 
         return $this->render('pages/tierlist/index.html.twig', [
-            'tierlists' => $tierlists
+            'tierlists' => []
         ]);
     }
 }
