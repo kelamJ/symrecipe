@@ -4,11 +4,12 @@ namespace App\Entity;
 
 use App\Repository\TierlistRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 //Vérification avec les asserts
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TierlistRepository::class)]
+#[UniqueEntity('name')]
 class Tierlist
 {
     #[ORM\Id]
