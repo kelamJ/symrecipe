@@ -36,9 +36,17 @@ class TierlistController extends AbstractController
         ]);
     }
 
+    /**
+     * Ce controller montre un form qui créer une tierlist
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
     #[Route('/tierlist/nouveau', 'tierlist.new', methods: ['GET', 'POST'])]
-    public function new(Request $request,
-    EntityManagerInterface $manager
+    public function new(
+        Request $request,
+        EntityManagerInterface $manager
     ) : Response {
         $tierlist = new Tierlist();
         $form = $this->createForm(TierlistType::class, $tierlist);
@@ -59,6 +67,17 @@ class TierlistController extends AbstractController
         }
 
         return $this->render('pages/tierlist/new.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    #[Route('tierlist/edition/{id}', 'tierlist.edit', methods: ['GET', 'POST'])]
+    public function edit(TierlistRepository $repository, int $id) : Response
+    {
+        $tierlist = $repository->findOneBy(["id" => $id]);
+        $form = $this->createForm(TierlistType::class, $tierlist);
+
+        return $this->render('pages/tierlist/edit.html.twig', [
             'form' => $form->createView()
         ]);
     }

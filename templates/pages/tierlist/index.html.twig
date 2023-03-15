@@ -6,6 +6,16 @@
     <div class="container mt-4">
         <h1>Mes tierlist :</h1>
 
+        <a href="{{ path('tierlist.new') }}" class="btn btn-primary">
+        Créer un ingrédient
+        </a>
+
+        {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+        {% endfor %}
+
         <div class="count mt-4">
             <h4>
                 Il y a {{ tierlists.getTotalItemCount }} tierlist au total
