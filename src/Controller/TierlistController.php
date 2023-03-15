@@ -72,13 +72,36 @@ class TierlistController extends AbstractController
     }
 
     #[Route('tierlist/edition/{id}', 'tierlist.edit', methods: ['GET', 'POST'])]
-    public function edit(TierlistRepository $repository, int $id) : Response
+    public function edit(
+        Tierlist $tierlist, 
+        Request $request, 
+        EntityManagerInterface $manager
+        ) : Response
     {
-        $tierlist = $repository->findOneBy(["id" => $id]);
         $form = $this->createForm(TierlistType::class, $tierlist);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $tierlist = $form->getData();
+
+            $manager->persist($tierlist);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                'Votre tierlist a été modifié avec succès !'
+            );
+
+        return $this->redirectToRoute('tierlist.index');
+        }
 
         return $this->render('pages/tierlist/edit.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    #[Route('/tierlist/suppression/{id}', 'tierlist.delete', methods: ['POST'])]
+    public function delete() : Response
+    {
+
     }
 }
