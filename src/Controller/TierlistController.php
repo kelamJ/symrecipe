@@ -99,9 +99,20 @@ class TierlistController extends AbstractController
         ]);
     }
 
-    #[Route('/tierlist/suppression/{id}', 'tierlist.delete', methods: ['POST'])]
-    public function delete() : Response
+    #[Route('/tierlist/suppression/{id}', 'tierlist.delete', methods: ['GET'])]
+    public function delete(
+        EntityManagerInterface $manager, 
+        Tierlist $tierlist
+        ) : Response
     {
+        $manager->remove($tierlist);
+        $manager->flush();
 
+        $this->addFlash(
+            'success',
+            'Votre tierlist a été modifié avec succès !'
+        );
+
+        return $this->redirectToRoute('tierlist.index');
     }
 }

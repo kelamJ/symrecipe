@@ -29,6 +29,8 @@
                     <th scope="col">Nom</th>
                     <th scope="col">Type</th>
                     <th scope="col">Date de création</th>
+                    <th scope="col">edition</th>
+                    <th scope="col">Suppresion</th>
                 </tr>
             </thead>
             <tbody> 
@@ -38,6 +40,12 @@
                     <td>{{ tierlist.name}}</td>
                     <td>{{ tierlist.type}}</td>
                     <td>{{ tierlist.createdAt|date('d/m/Y')}}</td>
+                    <td>
+                        <a href="{{ path('tierlist.edit', { id: tierlist.id }) }}" class="btn btn-info"> Modifier </a>
+                    </td>
+                    <td>
+                        <a href="{{ path('tierlist.delete', { id: tierlist.id }) }}" class="btn btn-warning"> Supprimer </a>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
