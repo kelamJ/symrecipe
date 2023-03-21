@@ -11,6 +11,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class GameController extends AbstractController
 {
+    /**
+     * Ce controller affiche tout les jeux
+     *
+     * @param GameRepository $repository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/jeux', name: 'game.index', methods: ['GET'])]
     public function index(GameRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
@@ -20,7 +28,7 @@ class GameController extends AbstractController
             10
         );
 
-        return $this->render('pages/tierlist/index.html.twig', [
+        return $this->render('pages/game/index.html.twig', [
             'games' => $games
         ]);
     }

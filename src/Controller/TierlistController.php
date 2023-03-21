@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class TierlistController extends AbstractController
 {
     /**
-     * Cette fonction affiche toutes les tierlist
+     * Ce Controller affiche toutes les tierlist
      *
      * @param TierlistRepository $repository
      * @param PaginatorInterface $paginator

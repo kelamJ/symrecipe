@@ -8,7 +8,7 @@
 
         <div class="count mt-4">
             <h4>
-                Il y a {{ game.getTotalItemCount }}  au total
+                Il y a {{ games.getTotalItemCount }}  au total
             </h4>
 
         <table class="table table-hover">
@@ -16,17 +16,20 @@
                 <tr>
                     <th scope="col">Numéro</th>
                     <th scope="col">Nom</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Date de création</th>
-                    <th scope="col">edition</th>
+                    <th scope="col">Plateforme</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Date de sortie</th>
+                    <th scope="col">Edition</th>
                     <th scope="col">Suppresion</th>
                 </tr>
             </thead>
             <tbody> 
             {% for game in games %}
             <tr class="table-primary">
-                    <th scope="row">{{ tierlist.id}}</th>
+                    <th scope="row">{{ game.id}}</th>
                     <td>{{ game.name}}</td>
+                    <td>{{ game.plateforme}}</td>
+                    <td>{{ game.price}}</td>
                     <td>{{ game.type}}</td>
                     <td>{{ game.createdAt|date('d/m/Y')}}</td>
                     <td>
@@ -35,15 +38,14 @@
                     <td>
                         Todo
                     </td>
-                </tr>
+            </tr>
             {% endfor %}
             </tbody>
 
         </table>
-        {# display navigation #}
+
         <div class="navigation d-flex justify-content-center mt-4">
-            {{ knp_pagination_render(tierlists) }}
+            {{ knp_pagination_render(games) }}
         </div>
-        
-</div>
+    </div>
 {% endblock %}
