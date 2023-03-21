@@ -37,7 +37,7 @@ class TierlistType extends AbstractType
                     'minlength' => '2',
                     'maxlength' => '25'
                 ],
-                'label' => 'Type',
+                'label' => 'Type de jeu',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],

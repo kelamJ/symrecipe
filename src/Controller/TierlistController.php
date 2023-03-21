@@ -37,7 +37,7 @@ class TierlistController extends AbstractController
     }
 
     /**
-     * Ce controller montre un form qui créer une tierlist
+     * Ce controller montre un form qui ajoute une tierlist
      *
      * @param Request $request
      * @param EntityManagerInterface $manager

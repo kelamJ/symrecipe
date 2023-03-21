@@ -6,6 +6,10 @@
     <div class="container mt-4">
         <h1>Mes jeux :</h1>
 
+        <a href="{{ path('game.new')}}" class="btn btn-primary">
+        Ajouter un jeux
+        </a>
+
         <div class="count mt-4">
             <h4>
                 Il y a {{ games.getTotalItemCount }}  au total
@@ -19,19 +23,27 @@
                     <th scope="col">Plateforme</th>
                     <th scope="col">Prix</th>
                     <th scope="col">Date de sortie</th>
+                    <th scope="col">Type de jeux</th>
                     <th scope="col">Edition</th>
                     <th scope="col">Suppresion</th>
+
                 </tr>
             </thead>
             <tbody> 
             {% for game in games %}
             <tr class="table-primary">
                     <th scope="row">{{ game.id}}</th>
-                    <td>{{ game.name}}</td>
+                    <td>{{ game.name}} </td>
                     <td>{{ game.plateforme}}</td>
-                    <td>{{ game.price}}</td>
-                    <td>{{ game.type}}</td>
+                    <td>
+                    {% if game.price is null %} 
+                        Non renseigné 
+                    {% else %} 
+                        {{ game.price }}
+                    {% endif %}
+                    </td>
                     <td>{{ game.createdAt|date('d/m/Y')}}</td>
+                    <td>{{ game.type}}</td>
                     <td>
                         Todo
                     </td>
