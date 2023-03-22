@@ -10,6 +10,12 @@
         Ajouter un jeux
         </a>
 
+        {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+        {% endfor %}
+
         <div class="count mt-4">
             <h4>
                 Il y a {{ games.getTotalItemCount }}  au total
@@ -45,10 +51,10 @@
                     <td>{{ game.createdAt|date('d/m/Y')}}</td>
                     <td>{{ game.type}}</td>
                     <td>
-                        Todo
+                        <a href="{{ path('game.edit', { id: game.id }) }}" class="btn btn-info"> Modifier </a>
                     </td>
                     <td>
-                        Todo
+                        <a href="{{ path('game.delete', { id: game.id }) }}" class="btn btn-warning"> Supprimer </a>
                     </td>
             </tr>
             {% endfor %}

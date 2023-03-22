@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class TierlistController extends AbstractController
 {
     /**
-     * Ce Controller affiche toutes les tierlist
+     * Ce controller nous permet d'afficher toutes les tierlist et d'y ajouter une pagination
      *
      * @param TierlistRepository $repository
      * @param PaginatorInterface $paginator
@@ -37,7 +37,7 @@ class TierlistController extends AbstractController
     }
 
     /**
-     * Ce controller montre un form qui ajoute une tierlist
+     * Ce controller nous permet de créer une nouvelle tierlist
      *
      * @param Request $request
      * @param EntityManagerInterface $manager
@@ -71,6 +71,16 @@ class TierlistController extends AbstractController
         ]);
     }
 
+
+    
+    /**
+     * Ce controller nous permet de modifier une tierlist
+     *
+     * @param Tierlist $tierlist
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
     #[Route('tierlist/edition/{id}', 'tierlist.edit', methods: ['GET', 'POST'])]
     public function edit(
         Tierlist $tierlist, 
@@ -99,7 +109,14 @@ class TierlistController extends AbstractController
         ]);
     }
 
-    #[Route('/tierlist/suppression/{id}', 'tierlist.delete', methods: ['GET'])]
+/**
+ *  Ce controller nous permet de supprimer une tierlist
+ *
+ * @param EntityManagerInterface $manager
+ * @param Tierlist $tierlist
+ * @return Response
+ */
+#[Route('/tierlist/suppression/{id}', 'tierlist.delete', methods: ['GET'])]
     public function delete(
         EntityManagerInterface $manager, 
         Tierlist $tierlist

@@ -42,7 +42,7 @@ class Game
 
     #[ORM\Column(nullable: true)]
     //Vérification avec les asserts
-    #[Assert\Positive()]
+    #[Assert\PositiveOrZero()]
     #[Assert\LessThan(1001)]
     private ?float $price = null;
     
