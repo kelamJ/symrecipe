@@ -14,7 +14,6 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class AppFixtures extends Fixture
 {
 private UserPasswordHasherInterface $hasher;
-
 public function __construct(UserPasswordHasherInterface $hasher)
 {
     $this->hasher = $hasher;
@@ -63,13 +62,12 @@ public function __construct(UserPasswordHasherInterface $hasher)
                 ->setEmail($faker->email())
                 ->setRoles(['ROLE_USER']);
 
-            $hashPassword = $this->hasher->hashPassword(
-                $user,
-                'password'
-            );
-
-            $user->setPassword($hashPassword);
-
+                $hashPassword = $this->hasher->hashPassword(
+                    $user,
+                    'password'
+                );
+    
+                $user->setPassword($hashPassword);
             $manager->persist($user);
         }
 
