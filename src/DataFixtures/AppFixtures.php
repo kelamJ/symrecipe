@@ -5,15 +5,20 @@ namespace App\DataFixtures;
 use Generator;
 use Faker\Factory;
 use App\Entity\Game;
+use App\Entity\User;
 use App\Entity\Tierlist;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
-    /*
-    * @var Generator
-    */
+private UserPasswordHasherInterface $hasher;
+
+public function __construct(UserPasswordHasherInterface $hasher)
+{
+    $this->hasher = $hasher;
+}
  // Utilisation du bundle faker pour générer automatiquement des données 
     public function load(ObjectManager $manager): void
     {
@@ -48,7 +53,26 @@ class AppFixtures extends Fixture
             }
 
             $manager->persist($game);
+        }
+
+        // Users
+        for ($i=0; $i < 10; $i++) { 
+            $user = new User();
+            $user->setFullName($faker->name())
+                ->setPseudo($faker->firstName())
+                ->setEmail($faker->email())
+                ->setRoles(['ROLE_USER']);
+
+            $hashPassword = $this->hasher->hashPassword(
+                $user,
+                'password'
+            );
+
+            $user->setPassword($hashPassword);
+
+            $manager->persist($user);
+        }
 
         $manager->flush();
-        }
+
 }}
