@@ -13,11 +13,10 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
-private UserPasswordHasherInterface $hasher;
-public function __construct(UserPasswordHasherInterface $hasher)
-{
-    $this->hasher = $hasher;
-}
+    public function __construct()
+    {
+        ;
+    }
  // Utilisation du bundle faker pour générer automatiquement des données 
     public function load(ObjectManager $manager): void
     {
@@ -60,14 +59,9 @@ public function __construct(UserPasswordHasherInterface $hasher)
             $user->setFullName($faker->name())
                 ->setPseudo($faker->firstName())
                 ->setEmail($faker->email())
-                ->setRoles(['ROLE_USER']);
+                ->setRoles(['ROLE_USER'])
+                ->setPlainPassword('password');
 
-                $hashPassword = $this->hasher->hashPassword(
-                    $user,
-                    'password'
-                );
-    
-                $user->setPassword($hashPassword);
             $manager->persist($user);
         }
 
